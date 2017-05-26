@@ -47,8 +47,8 @@ public class Programa {
      */
     private static int exibirMenu() {
         Scanner entrada = new Scanner(System.in);
-        
-        System.out.println("\n\n1) Adicionar Veiculo");
+        System.out.println("\n\nSimulador de Veículos");
+        System.out.println("1) Adicionar Veiculo");
         System.out.println("2) Alterar velocidade");
         System.out.println("3) Listar Veiculos");
         System.out.println("4) Sair");
