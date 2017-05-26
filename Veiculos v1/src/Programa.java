@@ -118,26 +118,26 @@ public class Programa {
         boolean alterou = false;
         Scanner entrada = new Scanner(System.in);
        
-        System.out.print("Qual o tipo de veiculo (1-carro, 2-caminhao, 3-onibus)? ");        
-        tipo = entrada.nextInt();
+//        System.out.print("Qual o tipo de veiculo (1-carro, 2-caminhao, 3-onibus)? ");        
+//        tipo = entrada.nextInt();
         System.out.print("Digite o modelo: ");
         modelo = entrada.next();
         System.out.print("Digite a velocidade: ");
         velocidade = entrada.nextInt();
-        
-        switch(tipo) {
-            case 1: // carro
-                alterou = simulador.alterarVelocidadeCarro(modelo, velocidade);
-                break;
-            case 2: // caminhao
-                alterou = simulador.alterarVelocidadeCaminhao(modelo, velocidade);            
-                break;
-            case 3: // onibus
-                alterou = simulador.alterarVelocidadeOnibus(modelo, velocidade);            
-                break;
-            default:
-                System.out.println("Tipo de veiculo invalido!");
-        }
+        alterou = simulador.alterarVelocidadeVeiculo(modelo, velocidade);
+//        switch(tipo) {
+//            case 1: // carro
+//                alterou = simulador.alterarVelocidadeVeiculo(modelo, velocidade);
+//                break;
+//            case 2: // caminhao
+//                alterou = simulador.alterarVelocidadeCaminhao(modelo, velocidade);            
+//                break;
+//            case 3: // onibus
+//                alterou = simulador.alterarVelocidadeOnibus(modelo, velocidade);            
+//                break;
+//            default:
+//                System.out.println("Tipo de veiculo invalido!");
+//        }
         
         if (alterou) {
             System.out.println("Velocidade alterada!");

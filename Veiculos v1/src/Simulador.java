@@ -9,20 +9,14 @@ import java.util.ArrayList;
  */
 public class Simulador
 {
-    // colecao de carros do simulador
-    private ArrayList<Carro> carros;
-    // colecao de caminhoes do simulador    
-    private ArrayList<Caminhao> caminhoes;
-    // colecao de onibus do simulador    
-    private ArrayList<Onibus> colOnibus;
+    // colecao de veículos do simulador
+    private ArrayList<Veiculo> veiculos;
     
     /**
      * Constroi um simulador e apenas inicializa as colecoes vazias de veiculos.
      */
     public Simulador() {
-        carros = new ArrayList<Carro>();
-        caminhoes = new ArrayList<Caminhao>();
-        colOnibus = new ArrayList<Onibus>();        
+        veiculos = new ArrayList<>();       
     }
     
     /**
@@ -34,9 +28,9 @@ public class Simulador
      * @param ehFlex Indica se o carro eh flex ou nao (em relacao ao combustivel)
      */
     public void adicionarCarro(String modelo, String marca, String placa, boolean ehFlex) {
-        Carro carro = new Carro(modelo, marca, placa, ehFlex);
+        Veiculo carro = new Carro(modelo, marca, placa, ehFlex);
         
-        carros.add(carro);
+        veiculos.add(carro);
     }
     
     /**
@@ -50,7 +44,7 @@ public class Simulador
     public void adicionarCaminhao(String modelo, String marca, String placa, double capacidadeCarga) {
         Caminhao caminhao = new Caminhao(modelo, marca, placa, capacidadeCarga);
         
-        caminhoes.add(caminhao);
+        veiculos.add(caminhao);
     }
     
     /**
@@ -64,7 +58,7 @@ public class Simulador
     public void adicionarOnibus(String modelo, String marca, String placa, int capacidadePassageiros) {
         Onibus onibus = new Onibus(modelo, marca, placa, capacidadePassageiros);
         
-        colOnibus.add(onibus);
+        veiculos.add(onibus);
     }
     
     /**
@@ -77,32 +71,26 @@ public class Simulador
     public String getDescricaoFrota() {
         String descricao = "FROTA DO SIMULADOR";
         
-        for (Carro c: carros) {
-            descricao += "\n" + c.getDescricaoCarro();
-        }
-        for (Caminhao c: caminhoes) {
-            descricao += "\n" + c.getDescricaoCaminhao();
-        }
-        for (Onibus o: colOnibus) {
-            descricao += "\n" + o.getDescricaoOnibus();
+        for (Veiculo v: veiculos) {
+            descricao += "\n" + v.getDescricaoVeiculo();
         }
         return descricao;
     }
     
     /**
-     * Altera a velocidade atual do carro cujo modelo foi passado.
-     * Se houver dois carros com o mesmo modelo, altera apenas o primeiro encontrado.
+     * Altera a velocidade atual do veiculo cujo modelo foi passado.
+     * Se houver dois veiculos com o mesmo modelo, altera apenas o primeiro encontrado.
      * A velocidade eh alterada se o carro for encontrado e a velocidade for valida
      * 
      * @param modelo Modelo do carro que tera sua velocidade alterada
      * @param velocidade Velocidade que o carro passara a ter
      * @return Retorna se a velocidade foi realmente alterada
      */
-    public boolean alterarVelocidadeCarro(String modelo, int velocidade) {
-        Carro carro = buscarCarro(modelo);
+    public boolean alterarVelocidadeVeiculo(String modelo, int velocidade) {
+        Veiculo veiculo = buscarVeiculo(modelo);
         
-        if (carro != null) {
-            return carro.setVelocidadeAtual(velocidade);
+        if (veiculo != null) {
+            return veiculo.setVelocidadeAtual(velocidade);
         }
         else {
             return false;
@@ -110,91 +98,19 @@ public class Simulador
     }
     
     /**
-     * Retorna um carro a partir do modelo passado.
-     * Se houver dois carros com o mesmo modelo retorna o primeiro encontrado.
+     * Retorna um Veiculo a partir do modelo passado.
+     * Se houver dois veiculos com o mesmo modelo retorna o primeiro encontrado.
      * 
      * @param modelo Modelo do carro a ser buscado
      * @return Retorna o carro encontrado ou null se ele nao existir.
      */
-    private Carro buscarCarro(String modelo) {
-        for (Carro c : carros) {
-            if (c.getModelo().equals(modelo)) {
-                return c;
+    private Veiculo buscarVeiculo(String modelo) {
+        for (Veiculo v : veiculos) {
+            if (v.getModelo().equals(modelo)) {
+                return v;
             }
         }
         return null;
     }
-    
-    /**
-     * Altera a velocidade atual do caminhao cujo modelo foi passado.
-     * Se houver dois caminhoes com o mesmo modelo, altera apenas o primeiro encontrado.
-     * A velocidade eh alterada se o caminhao for encontrado e a velocidade for valida
-     * 
-     * @param modelo Modelo do caminhao que tera sua velocidade alterada
-     * @param velocidade Velocidade que o caminhao passara a ter
-     * @return Retorna se a velocidade foi realmente alterada
-     */
-    public boolean alterarVelocidadeCaminhao(String modelo, int velocidade) {
-        Caminhao caminhao = buscarCaminhao(modelo);
-        
-        if (caminhao != null) {
-            return caminhao.setVelocidadeAtual(velocidade);
-        }
-        else {
-            return false;
-        }
-    }
-    
-    /**
-     * Retorna um caminhao a partir do modelo passado.
-     * Se houver dois caminhoes com o mesmo modelo retorna o primeiro encontrado.
-     * 
-     * @param modelo Modelo do caminhao a ser buscado
-     * @return Retorna o caminhao encontrado ou null se ele nao existir.
-     */
-    private Caminhao buscarCaminhao(String modelo) {
-        for (Caminhao c : caminhoes) {
-            if (c.getModelo().equals(modelo)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Altera a velocidade atual do onibus cujo modelo foi passado.
-     * Se houver dois onibus com o mesmo modelo, altera apenas o primeiro encontrado.
-     * A velocidade eh alterada se o onibus for encontrado e a velocidade for valida
-     * 
-     * @param modelo Modelo do onibus que tera sua velocidade alterada
-     * @param velocidade Velocidade que o onibus passara a ter
-     * @return Retorna se a velocidade foi realmente alterada
-     */
-    public boolean alterarVelocidadeOnibus(String modelo, int velocidade) {
-        Onibus onibus = buscarOnibus(modelo);
-        
-        if (onibus != null) {
-            return onibus.setVelocidadeAtual(velocidade);
-        }
-        else {
-            return false;
-        }
-    }
-    
-    /**
-     * Retorna um onibus a partir do modelo passado.
-     * Se houver dois onibus com o mesmo modelo retorna o primeiro encontrado.
-     * 
-     * @param modelo Modelo do onibus a ser buscado
-     * @return Retorna o onibus encontrado ou null se ele nao existir.
-     */
-    private Onibus buscarOnibus(String modelo) {
-        for (Onibus o : colOnibus) {
-            if (o.getModelo().equals(modelo)) {
-                return o;
-            }
-        }
-        return null;
-    }    
 }
 
