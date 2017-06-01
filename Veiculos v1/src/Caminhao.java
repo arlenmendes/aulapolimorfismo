@@ -40,7 +40,23 @@ public class Caminhao extends Veiculo
 	 * 
 	 * @return A descricao do caminhao (a descricao do veiculo mais seus campos separados por tabulacoes)
      */
-    public String getDescricaoCaminhao() {
-        return getDescricaoVeiculo() + "\t" + capacidadeCarga;
+    @Override
+    public String getDescricaoVeiculo() {
+        return getDescricaoVeiculo() + "\t" + capacidadeCarga + "\tR$ " + calcularImposto();
+    }
+    
+    @Override
+    public double calcularImposto() {
+        double imposto = 0;
+        
+        if(capacidadeCarga < 10) {
+            imposto = super.calcularImposto() * 0.9;
+        } else if(capacidadeCarga < 30)  {
+            imposto = super.calcularImposto();
+        } else {
+            imposto = super.calcularImposto() * 3;
+        }
+        
+        return imposto;
     }
 }

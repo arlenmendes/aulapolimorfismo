@@ -39,7 +39,19 @@ public class Onibus extends Veiculo {
 	 * 
 	 * @return A descricao do onibus (a descricao do veiculo mais seus campos separados por tabulacoes)
      */
-    public String getDescricaoOnibus() {
-        return getDescricaoVeiculo() + "\t" + capacidadePassageiros;
+    @Override
+    public String getDescricaoVeiculo() {
+        return super.getDescricaoVeiculo() + "\t" + capacidadePassageiros + "\tR$ " + calcularImposto();
+    }
+    
+    @Override
+    public double calcularImposto() {
+        double imposto = 0;
+        
+        if(capacidadePassageiros > 30) {
+            imposto = super.calcularImposto();
+        }
+        
+        return imposto;
     }
 }

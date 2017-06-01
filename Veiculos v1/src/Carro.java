@@ -39,14 +39,28 @@ public class Carro extends Veiculo {
 	 * 
 	 * @return A descricao do carro (a descricao do veiculo mais seus campos separados por tabulacoes)
      */
-    public String getDescricaoCarro() {
-        String descricao = getDescricaoVeiculo();
+    @Override
+    public String getDescricaoVeiculo() {
+        String descricao = super.getDescricaoVeiculo();
         if (ehFlex) {
-            descricao = descricao + "\tFlex";
+            descricao = descricao + "\tFlex" + "\tR$ " + calcularImposto();
         }
         else {
-            descricao = descricao + "\tComum";
+            descricao = descricao + "\tComum" + "\tR$ " + calcularImposto();
         }
         return descricao;
+    }
+    
+    @Override
+    public double calcularImposto() {
+        double imposto = 0;
+        
+        if(ehFlex) {
+            imposto = super.calcularImposto() * 0.9;
+        } else {
+            imposto = super.calcularImposto() * 1.05;
+        }
+        
+        return imposto;
     }
 }

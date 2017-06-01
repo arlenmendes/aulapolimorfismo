@@ -12,6 +12,7 @@ public class Veiculo {
     private String marca;
     private String placa;
     private int velocidadeAtual;
+    private double imposto = 100;
     
     /*
      * Constroi o objeto a partir do modelo, marca e placa passados.
@@ -88,6 +89,14 @@ public class Veiculo {
 	 * @return A descricao do veiculo (seus campos separados por tabulacoes)
      */
     public String getDescricaoVeiculo() {
-        return placa + "\t" + modelo + "\t" + marca + "\t" + velocidadeAtual + " Km/h";
+        return placa + "\t" + modelo + "\t" + marca + "\t" + calcularImposto() + "\t" + velocidadeAtual + " Km/h";
+    }
+    
+    /**
+     *
+     * @return O imposto do veiculo
+     */
+    public double calcularImposto(){
+        return this.imposto;
     }
 }

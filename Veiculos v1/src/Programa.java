@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @version 2016-09-16
  */
 public class Programa {
-    private static Simulador simulador;
+    private static TesteSimulador2 simulador;
     
     /**
      * Metodo principal que inicial a execucao do programa
@@ -16,7 +16,7 @@ public class Programa {
 	 * @param args Parametros do programa (o programa nao espera nenhum)
      */
     public static void main(String[] args) {
-        simulador = new Simulador();
+        simulador = new TesteSimulador2();
         
         int opcaoMenu;
         do {
@@ -74,7 +74,7 @@ public class Programa {
         System.out.print("Digite a placa: ");
         placa = entrada.next();
         
-        System.out.print("Qual o tipo de veiculo (1-carro, 2-caminhao, 3-onibus)? ");
+        System.out.print("Qual o tipo de veiculo (1-carro, 2-caminhao, 3-onibus, 4-trator, 5-moto)? ");
         tipo = entrada.nextInt();
         
         switch(tipo) {
@@ -97,6 +97,14 @@ public class Programa {
                 simulador.adicionarOnibus(modelo, marca, placa, capacidadePas);
                 adicionado = true;
                 break;
+            case 4: //trator
+                simulador.adicionarTrator(modelo, marca, placa);
+                adicionado = true;
+            case 5: //moto
+                System.out.print("Digite as cilindradas:");
+                int cilindradas = entrada.nextInt();
+                simulador.adicionarMoto(modelo, marca, placa, cilindradas);
+                adicionado = true;
             default:
                 System.out.println("Tipo de veiculo invalido!");
         }
